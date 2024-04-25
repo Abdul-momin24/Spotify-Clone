@@ -188,10 +188,18 @@ a{
     margin-bottom: 1.5rem;
 }
 
+.all{
+    pointer-events: fill;
+}
+
 .cards-container{
     display: flex;
     flex-wrap: wrap;
 }
+/* 
+.trending, .featuring, .recently{
+    pointer-events:fill;
+} */
 
 .card-img{
     width:100%;
@@ -205,6 +213,11 @@ a{
 .card-info{
     font-size: 0.75rem;
     opacity: 0.5;
+}
+
+
+ .card-img, .card-title, .card-info{
+    pointer-events: none;
 }
 
 .footer{
@@ -227,6 +240,11 @@ a{
     align-items: center;
 }
 
+.heart{
+    color:#1bd760;
+}
+
+
 .album{
     width:25%;
 }
@@ -246,6 +264,7 @@ a{
 
 }
 
+
 .player-control-icon{
     height: 1rem;
     margin:1rem 1rem 0.5rem 1rem;
@@ -264,18 +283,21 @@ a{
 
 /* In this we will learn new priperties in CSS */
 .progress-bar{
-    width:70%;
-    appearance: none;
+    width:75%;
+    height: 10px;
     background-color: transparent;
     cursor: pointer;
+    transition: all 0.1s ease-in-out;
 
 }
 
 /* here we wil learn about sliders and track in range  */
 /* And there styling property as they are psuedo elements */
 
+
+
 .progress-bar::-webkit-slider-runnable-track{
-    background-color: #ddd;
+    background-color: transparent;
     border-radius: 100px;
     height: 0.25rem;
 }
@@ -283,12 +305,13 @@ a{
 /* Now we wil style thumb in the range */
 
 .progress-bar::-webkit-slider-thumb{
-    appearance: none;
+    appearance:none;
     height: 1rem;
     width: 1rem;
     background-color: #1bd760;
     border-radius:50%;
     margin-top:-6px;
+    transition: 0.2s ease-in-out;
 
 }
 
@@ -298,9 +321,10 @@ a{
     align-items: center;
 }
 
-.album-photo{ margin:0.5rem;
+.album-photo{ 
+    margin:0.5rem;
     width: 20%;
-    height: 80%;
+    height: 75%;
     border-radius: 1rem;
 
 }
