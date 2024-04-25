@@ -65,59 +65,21 @@
                     <i class="fa-regular fa-user"></i>
                </div>
             </div> 
-    
-            <h2>Recently Played</h2>
-            <div class="cards-container">
-                <div class="card">
-                    <img src="./assets/card1img.jpeg" class="card-img">
-                    <p class="card-title">Top 50 global</p>
-                    <p class="card-info">Your daily updates of the most played track...</p>
-                </div>
+            <div class="all">
+                <h2>Recently Played</h2>
+            <div class="cards-container recently">
             </div>
-
             
             <h2>Trending now near you</h2>
-            <div class="cards-container">
-                <div class="card">
-                    <img src="./assets/card4img.jpeg" class="card-img">
-                    <p class="card-title">Top 50 global</p>
-                    <p class="card-info">Your daily updates of the most played track...</p>
-                </div>
-          
-                <div class="card">
-                    <img src="./assets/card3img.jpeg" class="card-img">
-                    <p class="card-title">Top 50 global</p>
-                    <p class="card-info">Your daily updates of the most played track...</p>
-                </div>
-           
-                <div class="card">
-                    <img src="./assets/card2img.jpeg" class="card-img">
-                    <p class="card-title">Top 50 global</p>
-                    <p class="card-info">Your daily updates of the most played track...</p>
-                </div>
+            <div class="cards-container trending">
             </div>
 
             <h2>Featured Songs</h2>
-            <div class="cards-container">
-                <div class="card">
-                    <img src="./assets/card5img.jpeg" class="card-img">
-                    <p class="card-title">Top 50 global</p>
-                    <p class="card-info">Your daily updates of the most played track...</p>
-                </div>
-          
-                <div class="card">
-                    <img src="./assets/card6img.jpeg" class="card-img">
-                    <p class="card-title">Top 50 global</p>
-                    <p class="card-info">Your daily updates of the most played track...</p>
-                </div>
-           
-                <div class="card">
-                    <img src="./assets/card1img.jpeg" class="card-img">
-                    <p class="card-title">Top 50 global</p>
-                    <p class="card-info">Your daily updates of the most played track...</p>
-                </div>
+            <div class="cards-container featuring">
             </div>
 
+            </div>
+            
             <div class="footer">
                 <div class="line"></div>
             </div>
@@ -126,26 +88,26 @@
 
         <div class="music-player">
             <div class="album">
-                <img src="./assets/card3img.jpeg" class="album-photo"/>
+                <img src="" class="album-photo"/>
                 <div class="album-title">
-                <a href="#">One Love</a>
-                <p class="song-name"> Mere Pass tum ho</p>
+                
+                
                 </div>
                 <div class="heart-img">
-                    <i class="fa-solid fa-heart" style="color:#1bd760"></i>
+                    <i class="fa-solid fa-heart heart" ></i>
                 </div>
             </div>
             <div class="player">
                 <div class="player-controls">
-                    <img src="./assets/player_icon1.png" class="player-control-icon"/>
-                    <img src="./assets/player_icon2.png" class="player-control-icon"/>
-                    <img src="./assets/player_icon3.png" class="player-control-icon" style="opacity:1; height: 2rem"/>
-                    <img src="./assets/player_icon4.png" class="player-control-icon"/>
-                    <img src="./assets/player_icon5.png" class="player-control-icon"/>
+                    <img src="./assets/player_icon1.png" class="player-control-icon" id="shuffle"/>
+                    <img src="./assets/player_icon2.png" class="player-control-icon" id="backward"/>
+                    <img src="./assets/player_icon3.png" class="player-control-icon" id="plays" style="opacity:1; height: 2rem; border-radius:50% " />
+                    <img src="./assets/player_icon4.png" class="player-control-icon" id="forward"/>
+                    <img src="./assets/player_icon5.png" class="player-control-icon" id="restart"/>
                 </div>
                 <div class="playback-bar">
                     <span class="curr-time">00:00</span>
-                    <input type="range" min="0" max="100" step="10" class="progress-bar">
+                    <input type="range" min="0" max="100" class="progress-bar" style="accent-color: #1bd760;">
                     <span class="tot-time">3:33</span>
                 </div>
             </div>
@@ -153,14 +115,16 @@
                 <i class="fa-solid fa-play"></i>
                 <i class="fa-solid fa-microphone-lines"></i>
                 <i class="fa-solid fa-bars"></i>
-                <i class="fa-brands fa-windows" style="color:#1bd760; opacity:1"></i>
+                <i class="fa-brands fa-windows" style="color:#1bd760; opacity: 1"></i>
                 <div class="controls-volume">
                     <i class="fa-solid fa-volume-high"></i>
-                    <input type="range" min="0" max="100" step="1">
+                    <input type="range" oninput="setVolume(this)" min="0" max="1" step="0.01" class="volume-meter" value="0" >
                 </div>
                 <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
             </div>
         </div>
     </div>
+
+<script src="script.js"></script>
 </body>
 </html>
