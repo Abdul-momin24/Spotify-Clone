@@ -16,12 +16,8 @@ audio.preload="metadata";
 let heart = document.querySelector(".heart");
 let playerControls = document.querySelector(".player-controls");
 let playing = audio.play();
-// initiliation of array data 
-let recentlyAdded=[]
 
-
-
-
+let recentlyAdded=[];
 
 let arr=[
     {
@@ -49,102 +45,100 @@ let arr=[
         Songurl:"./assets/music/bhaagDK.mp3",
         cardinfo:"This is the song from DK bose movie...",
     },
-];
+];// Thus array contains the data of the trending section
 
 
 let arrFeatured =[
     {
         songName:"Don",
         image:"./assets/images/don.jpeg",
-        url:"./assets/music/maihoon.mp3",
+        Songurl:"./assets/music/maihoon.mp3",
         cardinfo:""
     },
     {
         songName:"Malnag",
         image:"./assets/images/malang.jpeg",
-        url:"./assets/music/Malang.mp3",
+        Songurl:"./assets/music/Malang.mp3",
         cardinfo:""
     },
     {
         songName:"The Starboy",
         image:"./assets/images/satrboy.jpeg",
-        url:"./assets/music/Starboy.mp3",
+        Songurl:"./assets/music/Starboy.mp3",
         cardinfo:"This song of the album Weeknd"
     },{
         songName:"Yeh Dosti",
         image:"./assets/images/sholay.jpeg",
-        url:"./assets/music/YehDosti.mp3",
+        Songurl:"./assets/music/YehDosti.mp3",
         cardinfo:"This song is one of the famous song of the legendry movie Sholay"
     },
     {
         songName:"One Love",
         image:"./assets/images/one love.jpg",
-        url:"./assets/music/One.mp3",
+        Songurl:"./assets/music/One.mp3",
         cardinfo:"By Shubh"
     },
-]
+]// This array contains data of the songs in the featured section
 
-
+let shufflingArray = arr.concat(arrFeatured);// adding two arrays for getting the function of shuffling
 
 audio.onloadedmetadata = function(){
-    progress.max = audio.duration
+    progress.max = audio.duration // maximum value of audio duration transfeered to these values
     progress.value = audio.currentTime;
-};
+};//here we are updating the progress bar of the music player as the songs moves on
 
+
+// This below function is the heart of this audio playing feature as well as main fucnction
 function audioPlayer(){ 
     selectedAll.addEventListener("click", function(e){
-        if(e.target.class  == "upar"){
-            document.querySelector(".trending").addEventListener("click",function(e){
+        if(e.target.id  < 4){
                 selectedSong= e.target.id;
-                addingNearYouTrending();
+                audioTrending();
+                recentlyPlayedTrending()
+                addingRecently()
                 document.querySelector("#plays").src="./assets/player_pause.png";
-                flag=1;
+                flag_play=1;
                 audio.play();
-        })}
+        }
         else{
-            document.querySelector(".featuring").addEventListener("click",function(e){
                 selectedSong= e.target.id - 5;
-                addingNearYou();
+                audiofeatured();
+                recentlyPlayedFeatured();
+                addingRecently()
                 document.querySelector("#plays").src="./assets/player_pause.png";
-                flag=1;
+                flag_play=1;
                 audio.play();
-})}})
-    }
+}})}
 
 
 if(playing){
     setInterval(()=>{
         progress.value=audio.currentTime;
-        songtimeUpdate()
-    },100)}
+        songtimeUpdate()},100)
+}
 
 progress.onchange = function(){
 audio.currentTime =progress.value;   
 }
 
 
-
-//controlling volume
 function setVolume(el){
     audio.volume = el.value;
 }
 
-// function playerController(){
+
 document.querySelector("#plays").addEventListener("click",function(e){
     if(flag_play==0){
         e.target.src="./assets/player_pause.png";
         flag_play=1;
-        audio.play()
+        audio.play()  
     }
     else{
         e.target.src="./assets/player_icon3.png";
         flag_play=0;
         audio.pause();
-
     }
-
-})
-
+});
 
 function songtimeUpdate(){
     let curmins = Math.floor(audio.currentTime / 60);
@@ -168,26 +162,27 @@ function songtimeUpdate(){
         startingTime.innerHTML = curmins + ":" + cursecs;
         totalTime.innerHTML= durmins + ":"+ dursecs;
 
-    }
+}
 
+function audioTrending(){
+    audio.src = arr[selectedSong].SongSongurl;
+    document.querySelector(".album img").src=`${arr[selectedSong].image}`
+    document.querySelector(".album-title").innerHTML=`<a href="#">${arr[selectedSong].songName}</a>
+    <p class="song-name">${arr[selectedSong].cardinfo}</p>`; 
+}
 
 function addingTrending(){
     let clutter="";
-
     arr.forEach(function(details, idx){
-        clutter += `<div class="card upar" id ="${idx}">
+        clutter += `<div class="card" id ="${idx}">
                 <img src="${details.image}" class="card-img">
                 <p class="card-title">${details.songName}</p>
                 <p class="card-info">${details.cardinfo}</p>
     </div>`;
-    })
-
-    document.querySelector(".trending").innerHTML=clutter;     
+    });
+    document.querySelector(".trending").innerHTML=clutter;    
+    audioTrending();
     
-    audio.src = arr[selectedSong].Songurl;
-    document.querySelector(".album img").src=`${arr[selectedSong].image}`
-    document.querySelector(".album-title").innerHTML=`<a href="#">${arr[selectedSong].songName}</a>
-    <p class="song-name">${arr[selectedSong].cardinfo}</p>`;
 }
 
 function addingRecently(){
@@ -198,41 +193,25 @@ function addingRecently(){
         <p class="card-title">${details.songName}</p>
         <p class="card-info">${details.cardinfo}</p>
     </div>`;
-    })
-    
+    })    
     document.querySelector(".recently").innerHTML=clutter;
 
 }
 
 
-function addingNearYouTrending(){
-    let clutter="";
-// ye featureing waale gane load krtA Hai pr kaam trending waale sogns pr krta hai
-    arr.forEach(function(details, idx){
-        clutter += `<div class="card" id=${idx+ 5}>
-        <img src="${details.image}" class="card-img">
-        <p class="card-title">${details.songName}</p>
-        <p class="card-info">${details.cardinfo}</p>
-    </div>`;
-    })
-
-    document.querySelector(".featuring").innerHTML=clutter;
-
-    audio.src = arr[selectedSong].Songurl;
-    
-    document.querySelector(".album img").src=`${arr[selectedSong].image}`
-    document.querySelector(".album-title").innerHTML=`<a href="#">${arr[selectedSong].songName}</a>
-    <p class="song-name">${arr[selectedSong].cardinfo}</p>`;
-    addingRecently();   
-    recentlyPlayed();
-    
-    
+function audioShuffled(){
+    audio.src = shufflingArray[selectedSong].Songurl;
+    document.querySelector(".album img").src=`${shufflingArray[selectedSong].image}`
+    document.querySelector(".album-title").innerHTML=`<a href="#">${shufflingArray[selectedSong].songName}</a>
+    <p class="song-name">${shufflingArray[selectedSong].cardinfo}</p>`;
 }
 
-
-
-
-
+function audiofeatured(){
+    audio.src = arrFeatured[selectedSong].Songurl;
+    document.querySelector(".album img").src=`${arrFeatured[selectedSong].image}`
+    document.querySelector(".album-title").innerHTML=`<a href="#">${arrFeatured[selectedSong].songName}</a>
+    <p class="song-name">${arrFeatured[selectedSong].cardinfo}</p>`;
+}
 
 function addingNearYou(){
     let clutter="";
@@ -247,21 +226,8 @@ function addingNearYou(){
 
     document.querySelector(".featuring").innerHTML=clutter;
 
-    audio.src = arrFeatured[selectedSong].url;
-    
-    document.querySelector(".album img").src=`${arrFeatured[selectedSong].image}`
-    document.querySelector(".album-title").innerHTML=`<a href="#">${arrFeatured[selectedSong].songName}</a>
-    <p class="song-name">${arrFeatured[selectedSong].cardinfo}</p>`;
-    addingRecently();   
-    recentlyPlayed();
-    
-    
+    audiofeatured()    
 }
-
-
-// selectedAll.addEventListener("click", function(details){
-//     console.log(details.target)
-// })
 
 function heartChangeColor(){
     heart.addEventListener("click", function() {
@@ -276,20 +242,16 @@ function heartChangeColor(){
 }
 
 
-
-
-
-
 forward.addEventListener("click", function(){
-    if(selectedSong< arr.length-1 || selectedSong< arrFeatured.length-1){
+    if(selectedSong< arr.length-1){
         selectedSong++;
-        addingNearYou();
+        audiofeatured();
         if(flag_play==1){
             audio.play();
         }else{
-            audio.pause();
+            audio.pause();  
         }
-        
+    
         backward.style.opacity=0.7;
         forward.addEventListener("mouseover", function(){
             forward.style.opacity=1;
@@ -309,7 +271,6 @@ backward.addEventListener("click",function(){
         }else{
             audio.pause();
         }
-        
         forward.style.opacity=0.7;
         backward.addEventListener("mouseover", function(){
             backward.style.opacity=1;
@@ -322,8 +283,10 @@ backward.addEventListener("click",function(){
 
 
 shufffle.addEventListener("click",function(){
-    selectedSong = Math.floor((Math.random()*arr.length ));
-    addingNearYou();
+    selectedSong = Math.floor((Math.random()*shufflingArray.length ));
+    audioShuffled()
+    recentlyPlayedShuffled()
+    addingRecently();
     if(flag_play==1){
         audio.play();
     }else{
@@ -343,7 +306,28 @@ restart.addEventListener("click", function(){
     
 })
 
-function recentlyPlayed(){
+
+function recentlyPlayedShuffled(){
+    if(recentlyAdded.length <4){
+        recentlyAdded.unshift(shufflingArray[selectedSong])
+    }else{
+        recentlyAdded.pop();
+            recentlyAdded.unshift(shufflingArray[selectedSong]);
+    }
+}
+
+function recentlyPlayedTrending(){
+            if(recentlyAdded.length<4){
+                recentlyAdded.unshift(arr[selectedSong]);
+
+            }
+            else{
+                recentlyAdded.pop();
+                recentlyAdded.unshift(arr[selectedSong]);
+            }}
+        
+
+function recentlyPlayedFeatured(){
     if(recentlyAdded.length<4){
         recentlyAdded.unshift(arrFeatured[selectedSong]);
     }
@@ -352,11 +336,10 @@ function recentlyPlayed(){
         recentlyAdded.unshift(arrFeatured[selectedSong]);
     }
 }
-
-
-songtimeUpdate();
+        
 audioPlayer();
+addingTrending();
+songtimeUpdate();
 heartChangeColor();
 addingNearYou();
-addingTrending();
 setVolume();
