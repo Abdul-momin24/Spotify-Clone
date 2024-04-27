@@ -56,14 +56,14 @@ let arrFeatured =[
         songName:"Don",
         image:"./assets/images/don.jpeg",
         Songurl:"./assets/music/maihoon.mp3",
-        cardinfo:"",
+        cardinfo:"Most famous Song of the decade of 2010",
         SongNo:"5",
     },
     {
-        songName:"Malnag",
+        songName:"Malang",
         image:"./assets/images/malang.jpeg",
         Songurl:"./assets/music/Malang.mp3",
-        cardinfo:"",
+        cardinfo:"Composed by Ved Sharma",
         SongNo:"6",
     },
     {
